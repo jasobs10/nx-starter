@@ -15,16 +15,109 @@
               {
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "scope:web",
+                "onlyDependOnLibsWithTags": [
+                  "scope:web",
+                  "scope:ui-kit",
+                  "scope:ui-api",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:api",
+                "onlyDependOnLibsWithTags": ["scope:api", "scope:db", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:ui-test",
+                "onlyDependOnLibsWithTags": [
+                  "scope:ui-test",
+                  "scope:web",
+                  "scope:ui-kit",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:api-test",
+                "onlyDependOnLibsWithTags": ["scope:api-test", "scope:api", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:ui-kit",
+                "onlyDependOnLibsWithTags": ["scope:ui-kit", "scope:ui-api", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:db",
+                "onlyDependOnLibsWithTags": ["scope:db", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:db",
+                "onlyDependOnLibsWithTags": ["scope:db", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:ui-api",
+                "onlyDependOnLibsWithTags": ["scope:ui-api", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:infra",
+                "onlyDependOnLibsWithTags": ["scope:infra", "scope:shared"]
               }
             ]
           }
-        ]
+        ],
+        "prefer-template": "error",
+        "no-useless-concat": "error",
+        "no-nested-ternary": "error",
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "endOfLine": "auto"
+          }
+        ],
+        "yoda": ["error", "never"]
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["./tsconfig.eslint.json"]
+      },
       "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/prefer-enum-initializers": "error",
+        "@typescript-eslint/no-mixed-enums": "error",
+        "@typescript-eslint/prefer-includes": "error",
+        "@typescript-eslint/prefer-string-starts-ends-with": "error",
+        "@typescript-eslint/await-thenable": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variable",
+            "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+          },
+          {
+            "selector": "enumMember",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "parameter",
+            "format": ["camelCase", "PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "typeLike",
+            "format": ["PascalCase"]
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
@@ -38,5 +131,6 @@
       },
       "rules": {}
     }
-  ]
+  ],
+  "extends": ["plugin:prettier/recommended"]
 }

@@ -19,5 +19,5 @@
       "dependsOn": ["build"]
     }
   },
-  "tags": []
+  "tags": ["scope:shared"]
 }
