@@ -1,0 +1,8 @@
+{
+  "name": "ui-kit",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui/ui-kit/src",
+  "projectType": "library",
+  "tags": ["scope:ui"],
+  "targets": {}
+}

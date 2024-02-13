@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "@jasobs10/prisma": ["libs/api/db-access/prisma/src/index.ts"],
-      "@jasobs10/schema-validator": ["libs/shared/utils/schema-validator/src/index.ts"]
+      "@jasobs10/schema-validator": ["libs/shared/utils/schema-validator/src/index.ts"],
+      "@jasobs10/ui-kit": ["libs/shared/ui/ui-kit/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp", "**/*.spec.ts", "jest.config.ts"]

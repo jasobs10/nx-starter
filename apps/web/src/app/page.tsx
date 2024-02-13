@@ -12,7 +12,7 @@ export default async function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there, </span>
+              <span className="text-primary"> Hello there, </span>
               Welcome web 👋
             </h1>
           </div>
