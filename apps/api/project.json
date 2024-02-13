@@ -1,21 +1,21 @@
 {
-  "name": "jasobs10-nx-starter",
+  "name": "api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/jasobs10-nx-starter/src",
+  "sourceRoot": "apps/api/src",
   "projectType": "application",
   "targets": {
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "jasobs10-nx-starter:build"
+        "buildTarget": "api:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "jasobs10-nx-starter:build:development"
+          "buildTarget": "api:build:development"
         },
         "production": {
-          "buildTarget": "jasobs10-nx-starter:build:production"
+          "buildTarget": "api:build:production"
         }
       }
     }
