@@ -1,6 +1,6 @@
-import { cn } from '@revision/shared/ui-kit/util';
 import { VariantProps, cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
+import { cn } from '../../util/ui-kit.util';
 
 const spinnerVariants = cva('animate-spin text-gray-300 dark:text-gray-600', {
   variants: {
