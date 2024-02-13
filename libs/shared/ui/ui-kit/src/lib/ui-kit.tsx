@@ -1,12 +1,7 @@
-import './ui-kit.css';
-
-/* eslint-disable-next-line */
-export interface UiKitProps {}
-
-export function UiKit(props: UiKitProps) {
+export function UiKit() {
   return (
     <div>
-      <h1>Welcome to UiKit!</h1>
+      <h1 className="text-primary">Welcome to UiKit!</h1>
     </div>
   );
 }
