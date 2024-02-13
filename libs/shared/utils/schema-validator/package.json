@@ -1,0 +1,12 @@
+{
+  "name": "@jasobs10/schema-validator",
+  "version": "0.0.1",
+  "dependencies": {
+    "@swc/helpers": "~0.5.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}

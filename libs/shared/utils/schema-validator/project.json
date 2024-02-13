@@ -1,0 +1,23 @@
+{
+  "name": "schema-validator",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/utils/schema-validator/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/utils/schema-validator",
+        "main": "libs/shared/utils/schema-validator/src/index.ts",
+        "tsConfig": "libs/shared/utils/schema-validator/tsconfig.lib.json",
+        "assets": ["libs/shared/utils/schema-validator/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs schema-validator {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}
