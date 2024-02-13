@@ -40,4 +40,9 @@ Thumbs.db
 
 .nx/cache
 
-.env
+# Env
+**/*.env
+
+# Postgres data
+.db-data
+

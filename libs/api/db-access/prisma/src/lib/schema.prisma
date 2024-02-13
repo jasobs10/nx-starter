@@ -21,16 +21,16 @@ model Account {
 }
 
 model User {
-  id                     String           @id @default(uuid())
-  givenName              String
-  familyName             String
-  username               String           @unique
-  primaryOrg             Org?             @relation(fields: [primaryOrgId], references: [id])
-  primaryOrgId           String?
-  roles                  SystemRole[]
-  createdAccounts        Account[]
-  createdAt              DateTime         @default(now()) @db.Timestamptz(6)
-  updatedAt              DateTime         @updatedAt @db.Timestamptz(6)
+  id              String       @id @default(uuid())
+  givenName       String
+  familyName      String
+  username        String       @unique
+  primaryOrg      Org?         @relation(fields: [primaryOrgId], references: [id])
+  primaryOrgId    String?
+  roles           SystemRole[]
+  createdAccounts Account[]
+  createdAt       DateTime     @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime     @updatedAt @db.Timestamptz(6)
 }
 
 model Org {

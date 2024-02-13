@@ -39,6 +39,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
+      "dependsOn": ["db:migrate"],
       "options": {
         "buildTarget": "api:build"
       },
@@ -49,6 +50,12 @@
         "production": {
           "buildTarget": "api:build:production"
         }
+      }
+    },
+    "db:migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run db:migrate:dev"
       }
     }
   },
