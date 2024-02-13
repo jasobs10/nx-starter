@@ -1,9 +1,11 @@
-export function UiKit() {
+const Example = () => {
   return (
     <div>
-      <h1 className="text-primary">Welcome to UiKit!</h1>
+      <h1 className="text-primary">Component from Ui-Kit!</h1>
     </div>
   );
 }
 
-export default UiKit;
+Example.displayName = 'Example';
+
+export { Example };
