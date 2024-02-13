@@ -1,0 +1,18 @@
+{
+  "overrides": [
+    {
+      "files": ["*.tsx", "*.jsx"],
+      "rules": {
+        "react/no-danger": "error",
+        "react/self-closing-comp": [
+          "error",
+          {
+            "component": true,
+            "html": true
+          }
+        ],
+        "react/display-name": "error"
+      }
+    }
+  ]
+}

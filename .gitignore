@@ -46,3 +46,5 @@ Thumbs.db
 # Postgres data
 .db-data
 
+# Next.js
+.next
