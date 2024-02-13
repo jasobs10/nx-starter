@@ -1,4 +1,4 @@
-import { ApiError } from '@revision/shared/data-access/api-client';
+import { ApiError } from '@jasobs10/api-client';
 import { UseQueryOptions } from '@tanstack/react-query';
 import { ParsedUrlQuery } from 'querystring';
 
