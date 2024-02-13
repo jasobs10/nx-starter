@@ -20,7 +20,7 @@
                 "sourceTag": "scope:web",
                 "onlyDependOnLibsWithTags": [
                   "scope:web",
-                  "scope:ui-kit",
+                  "scope:ui",
                   "scope:ui-api",
                   "scope:shared"
                 ]
@@ -32,7 +32,7 @@
               {
                 "sourceTag": "scope:ui-test",
                 "onlyDependOnLibsWithTags": [
-                  "scope:ui-test",
+                  "scope:ui",
                   "scope:web",
                   "scope:ui-kit",
                   "scope:shared"
