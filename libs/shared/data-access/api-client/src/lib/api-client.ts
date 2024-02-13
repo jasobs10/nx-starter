@@ -44,7 +44,7 @@ export class ApiClient {
     return queryString || undefined;
   };
 
-  async apiFetch<TResponseData = undefined, TRequestBody = undefined>(
+  async fetch<TResponseData = undefined, TRequestBody = undefined>(
     endpoint: string | undefined,
     {
       body: typedBody,
