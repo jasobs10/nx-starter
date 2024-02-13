@@ -7,6 +7,9 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -14,7 +17,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@jasobs10/prisma": ["libs/api/db-access/prisma/src/index.ts"],
+      "@jasobs10/schema-validator": ["libs/shared/utils/schema-validator/src/index.ts"]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "**/*.spec.ts", "jest.config.ts"]
 }
