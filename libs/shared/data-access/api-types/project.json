@@ -1,0 +1,23 @@
+{
+  "name": "api-types",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/data-access/api-types/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/data-access/api-types",
+        "main": "libs/shared/data-access/api-types/src/index.ts",
+        "tsConfig": "libs/shared/data-access/api-types/tsconfig.lib.json",
+        "assets": ["libs/shared/data-access/api-types/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs api-types {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}
