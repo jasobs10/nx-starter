@@ -18,6 +18,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jasobs10/api-client": ["libs/shared/data-access/api-client/src/index.ts"],
+      "@jasobs10/api-query": ["libs/shared/data-access/api-query/src/index.ts"],
       "@jasobs10/prisma": ["libs/api/db-access/prisma/src/index.ts"],
       "@jasobs10/schema-validator": ["libs/shared/utils/schema-validator/src/index.ts"],
       "@jasobs10/ui-kit": ["libs/shared/ui/ui-kit/src/index.ts"]

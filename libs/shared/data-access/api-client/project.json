@@ -1,0 +1,23 @@
+{
+  "name": "api-client",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/data-access/api-client/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/data-access/api-client",
+        "main": "libs/shared/data-access/api-client/src/index.ts",
+        "tsConfig": "libs/shared/data-access/api-client/tsconfig.lib.json",
+        "assets": ["libs/shared/data-access/api-client/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs api-client {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": ["scope:shared"]
+}
