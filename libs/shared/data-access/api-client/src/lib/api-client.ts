@@ -23,7 +23,10 @@ type ApiClientConfig<TResponseData, TRequestBody> = Omit<RequestInit, 'body'> & 
 export class ApiClient {
   private refreshTokenPromise: Promise<string | null> | undefined;
 
-  constructor(private readonly baseUrl: string, private readonly refreshTokenEndpoint = 'auth/refresh-token') {}
+  constructor(
+    private readonly baseUrl: string,
+    private readonly refreshTokenEndpoint = 'auth/refresh-token'
+  ) {}
 
   static makeQueryString(params: ParsedUrlQuery = {}): string | undefined {
     const paramsArr = Object.entries(params).reduce<string[][]>((acc, [key, value]) => {
@@ -42,7 +45,7 @@ export class ApiClient {
     const queryString = new URLSearchParams(paramsArr).toString();
 
     return queryString || undefined;
-  };
+  }
 
   async fetch<TResponseData = undefined, TRequestBody = undefined>(
     endpoint: string | undefined,
@@ -79,7 +82,10 @@ export class ApiClient {
         ...(typedBody && { body: isFile ? (typedBody as BodyInit) : JSON.stringify(typedBody) })
       };
 
-      let response: ApiResponse<TResponseData> = await fetch(`${this.baseUrl}/${endpoint}`, fetchOptions);
+      let response: ApiResponse<TResponseData> = await fetch(
+        `${this.baseUrl}/${endpoint}`,
+        fetchOptions
+      );
 
       if (response.status === 401 && shouldRefreshTokenOnUnauthorized) {
         const newCookies = await this.refreshToken(apiConfig);
@@ -141,7 +147,7 @@ export class ApiClient {
 
     const newCookies = await this.refreshTokenPromise;
     return newCookies;
-  };
+  }
 
   private async extractFetchResponseData<TResponseData>(
     response: ApiResponse<TResponseData>
@@ -153,5 +159,5 @@ export class ApiClient {
       const data = await response.text();
       return data as TResponseData;
     }
-  };
+  }
 }

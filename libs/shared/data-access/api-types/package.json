@@ -2,7 +2,9 @@
   "name": "@jasobs10/api-types",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "@prisma/client": "^5.9.1",
+    "class-validator": "^0.14.1"
   },
   "type": "commonjs",
   "main": "./src/index.js",

@@ -1,5 +1,5 @@
 {
-  "extends": ["plugin:@nx/react", "../../../../.eslintrc.base.json", "../../../../.eslint.react.json"],
+  "extends": ["plugin:@nx/react", "../../../../.eslintrc.base.json", "../../../../.eslintrc.react.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
