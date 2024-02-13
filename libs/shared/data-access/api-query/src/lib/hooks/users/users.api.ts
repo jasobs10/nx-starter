@@ -1,5 +1,5 @@
 import { UseApiQueryOptions } from '../../types';
-import { UserDto } from '@revision/shared/data-access/api-types';
+import { UserDto } from '@jasobs10/api-types';
 import { useApiQuery } from '../../use-api-query';
 
 export const USERS_ENDPOINT = 'users';
