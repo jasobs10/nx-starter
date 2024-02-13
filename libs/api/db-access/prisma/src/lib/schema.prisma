@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Account {
+  id              String   @id @default(uuid())
+  name            String   @unique
+  createdBy       User?    @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String?
+  orgs            Org[]
+  createdAt       DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime @updatedAt @db.Timestamptz(6)
+}
+
+model User {
+  id                     String           @id @default(uuid())
+  givenName              String
+  familyName             String
+  username               String           @unique
+  primaryOrg             Org?             @relation(fields: [primaryOrgId], references: [id])
+  primaryOrgId           String?
+  roles                  SystemRole[]
+  createdAccounts        Account[]
+  createdAt              DateTime         @default(now()) @db.Timestamptz(6)
+  updatedAt              DateTime         @updatedAt @db.Timestamptz(6)
+}
+
+model Org {
+  id           String           @id @default(uuid())
+  name         String
+  users        User[]
+  parentOrg    Org?             @relation("OrgToOrg", fields: [parentOrgId], references: [id])
+  parentOrgId  String?
+  childOrgs    Org[]            @relation("OrgToOrg")
+  account      Account?         @relation(fields: [accountId], references: [id])
+  accountId    String?
+  emailDomains OrgEmailDomain[]
+  createdAt    DateTime         @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime         @updatedAt @db.Timestamptz(6)
+}
+
+model OrgEmailDomain {
+  orgId     String
+  name      String
+  org       Org      @relation(fields: [orgId], references: [id])
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  @@id([orgId, name])
+}
+
+enum SystemRole {
+  SystemAdmin
+  User
+}
