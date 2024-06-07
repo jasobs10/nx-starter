@@ -1,5 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 import { ApiError } from './errors/api.error';
+import * as setCookieParser from 'set-cookie-parser';
 
 export interface ApiResponse<TResponseData> {
   ok: boolean;
@@ -20,13 +21,25 @@ type ApiClientConfig<TResponseData, TRequestBody> = Omit<RequestInit, 'body'> & 
   shouldRefreshTokenOnUnauthorized?: boolean;
 };
 
+interface ApiClientOptions {
+  baseUrl: string;
+  apiPrefix?: string;
+  refreshTokenEndpoint?: string;
+}
+
 export class ApiClient {
   private refreshTokenPromise: Promise<string | null> | undefined;
+  private readonly apiUrl: string;
+  private readonly refreshTokenEndpoint: string;
 
-  constructor(
-    private readonly baseUrl: string,
-    private readonly refreshTokenEndpoint = 'auth/refresh-token'
-  ) {}
+  constructor({
+    baseUrl,
+    apiPrefix,
+    refreshTokenEndpoint = 'auth/refresh-token'
+  }: ApiClientOptions) {
+    this.refreshTokenEndpoint = refreshTokenEndpoint;
+    this.apiUrl = apiPrefix ? `${baseUrl}/${apiPrefix}` : baseUrl;
+  }
 
   static makeQueryString(params: ParsedUrlQuery = {}): string | undefined {
     const paramsArr = Object.entries(params).reduce<string[][]>((acc, [key, value]) => {
@@ -83,18 +96,33 @@ export class ApiClient {
       };
 
       let response: ApiResponse<TResponseData> = await fetch(
-        `${this.baseUrl}/${endpoint}`,
+        `${this.apiUrl}/${endpoint}`,
         fetchOptions
       );
 
       if (response.status === 401 && shouldRefreshTokenOnUnauthorized) {
-        const newCookies = await this.refreshToken(apiConfig);
+        const setCookiesResponseHeaderValue = await this.refreshToken(apiConfig);
 
-        response = await fetch(`${this.baseUrl}/${endpoint}`, {
+        let newCookiesRequestHeaderValue: string | null = null;
+        if (setCookiesResponseHeaderValue) {
+          const splitCookies = setCookieParser.splitCookiesString(setCookiesResponseHeaderValue);
+
+          newCookiesRequestHeaderValue = splitCookies
+            .reduce((cookiesString, unparsedCookie) => {
+              const { name, value } = setCookieParser.parseString(unparsedCookie, {
+                decodeValues: false
+              });
+              cookiesString += `${name}=${value}; `;
+              return cookiesString;
+            }, '')
+            .trim();
+        }
+
+        response = await fetch(`${this.apiUrl}/${endpoint}`, {
           ...fetchOptions,
           headers: {
             ...fetchOptions.headers,
-            ...(cookies && newCookies && { Cookie: newCookies })
+            ...(cookies && newCookiesRequestHeaderValue && { Cookie: newCookiesRequestHeaderValue })
           }
         });
       }
@@ -130,7 +158,7 @@ export class ApiClient {
     if (!this.refreshTokenPromise) {
       this.refreshTokenPromise = (async () => {
         try {
-          const response = await fetch(`${this.baseUrl}/${this.refreshTokenEndpoint}`, {
+          const response = await fetch(`${this.apiUrl}/${this.refreshTokenEndpoint}`, {
             ...fetchOptions,
             method: 'POST'
           });
