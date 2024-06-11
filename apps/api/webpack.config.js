@@ -13,7 +13,20 @@ module.exports = {
       tsConfig: './tsconfig.app.json',
       assets: ['./src/assets'],
       optimization: false,
-      outputHashing: 'none'
+      outputHashing: 'none',
+      transformers: [
+        {
+          name: '@nestjs/swagger/plugin',
+          options: {
+            dtoFileNameSuffix: ['.dto.ts'],
+            controllerFileNameSuffix: '.controller.ts',
+            classValidatorShim: true,
+            dtoKeyOfComment: 'description',
+            controllerKeyOfComment: 'summary',
+            introspectComments: true
+          }
+        }
+      ]
     })
   ]
 };
